@@ -35,8 +35,8 @@ const Home = () => {
           <HotelFilterInputField isShown={true} />
         </View>
         <View style={styles.sliderWrapper}>
-          <PopularHotels />
-          <PopularHotels />
+          <PopularHotels show={undefined} />
+          <PopularHotels show={undefined} />
         </View>
       </View>
     </ScrollView>

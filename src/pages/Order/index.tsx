@@ -34,7 +34,7 @@ const Order = () => {
           backgroundColor: '#4691F2',
           padding: 20,
         }}>
-        <Text style={{color: 'white', fontSize: 20, fontWeight: 800}}>
+        <Text style={{color: 'white', fontSize: 20, fontWeight: '800'}}>
           {' '}
           Order History{' '}
         </Text>

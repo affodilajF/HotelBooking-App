@@ -14,7 +14,7 @@ import Bookmark from '../atom/Bookmark';
 import StarViewers from '../atom/StarViewers';
 import {useNavigation} from '@react-navigation/native';
 
-const Disc = ({isDisc, disc}) => {
+const Disc: React.FC<{isDisc: boolean; disc: number}> = ({isDisc, disc}) => {
   if (isDisc) {
     return <Text style={styles.discTag}> {disc}% off </Text>;
   } else {
@@ -37,7 +37,8 @@ const Hotel = ({
   return (
     <TouchableOpacity
       style={styles.hotelWrapper}
-      onPress={() => navigation.navigate('HotelDetails')}>
+      // onPress={() => navigation.navigate('HotelDetails')}
+    >
       <Disc isDisc={isDisc} disc={disc} />
       <View style={styles.imageWrapper}>
         <Image
@@ -74,7 +75,7 @@ const Hotel = ({
           <View style={{flexDirection: 'column'}}>
             <Text style={{fontSize: 9, color: 'black'}}>Start from </Text>
             <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
-              <Text style={{fontWeight: 800, fontSize: 22, color: '#4691F2'}}>
+              <Text style={{fontWeight: '800', fontSize: 22, color: '#4691F2'}}>
                 $135
               </Text>
               <Text style={{fontSize: 9}}> /night</Text>

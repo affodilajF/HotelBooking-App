@@ -5,7 +5,7 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 const ButtonGroup = () => {
   const [selectedButton, setSelectedButton] = useState(0);
 
-  const handleButtonPress = buttonId => {
+  const handleButtonPress = (buttonId: React.SetStateAction<number>) => {
     setSelectedButton(buttonId);
     // Tambahkan logika atau tindakan lain sesuai kebutuhan
   };

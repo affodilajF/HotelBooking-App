@@ -4,7 +4,11 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import HeroIcon from '../assets/Icon';
 
-export default function FilterButton({onPressFilterButton}) {
+type FilterButtonProps = {
+  onPressFilterButton: () => void;
+};
+
+const FilterButton: React.FC<FilterButtonProps> = ({onPressFilterButton}) => {
   return (
     <TouchableOpacity
       style={{
@@ -18,4 +22,6 @@ export default function FilterButton({onPressFilterButton}) {
       <HeroIcon type={'filter'} />
     </TouchableOpacity>
   );
-}
+};
+
+export default FilterButton;
