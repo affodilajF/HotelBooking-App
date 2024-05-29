@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
+
 import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
 import React from 'react';
 import BackButton from '../../atom/BackButton';
@@ -9,32 +9,34 @@ import Bookmark from '../../atom/Bookmark';
 import StarViewers from '../../atom/StarViewers';
 import Hotel from '../../components/Hotel';
 import RoomType from '../../components/RoomType';
+import {useNavigation} from '@react-navigation/native';
+import hotelsDummy from '../../dummyDatas/HotelsDummy';
 
-const HotelDetails = () => {
+const HotelDetails = ({route}) => {
+  const {objectItem} = route.params;
   return (
     <ScrollView style={{padding: 20, backgroundColor: 'white'}}>
-      <ImageSection />
-      <InfoSection />
+      <ImageSection objectItem={objectItem} />
+      <InfoSection objectItem={objectItem} />
     </ScrollView>
   );
 };
 
-const ImageSection = () => {
+const ImageSection = ({objectItem}) => {
+  const navigation = useNavigation();
   return (
     <View>
       <View style={styles.imageWrapper}>
         <View style={styles.imageWrapper}>
           <Image
             style={styles.imageHotel}
-            source={require('D:/SELF LEARNING/PROJECTS/projectOne/src/assets/Images/hotel3.png')}
+            source={{uri: objectItem.photos[0]}}
           />
         </View>
         <View style={styles.hotelTitleBackground}>
           <View style={{width: '100%'}}>
-            <Text style={styles.hotelTitle}>
-              Dome, Bambo Vila in Ecoliviggggy
-            </Text>
-            <Text style={styles.hotelTitle2}>Tirtomutro, Bali, Indonesia </Text>
+            <Text style={styles.hotelTitle}>{objectItem.name}</Text>
+            <Text style={styles.hotelTitle2}> {objectItem.address} </Text>
             <View
               style={{
                 flexDirection: 'row',
@@ -50,8 +52,9 @@ const ImageSection = () => {
                     paddingHorizontal: 15,
                     borderRadius: 15,
                   }}>
-                  <Text style={{color: 'white', fontSize: 16, fontWeight: 500}}>
-                    $134 - $206
+                  <Text
+                    style={{color: 'white', fontSize: 16, fontWeight: '500'}}>
+                    {objectItem.lowestPrice}$ - {objectItem.highestPrice}$
                   </Text>
                 </View>
                 <Text
@@ -63,7 +66,7 @@ const ImageSection = () => {
                     color: 'white',
                   }}>
                   {' '}
-                  20% OFF{' '}
+                  {objectItem.discount}% OFF{' '}
                 </Text>
               </View>
               <Bookmark size={'medium'} isBookmarked={false} />
@@ -71,7 +74,12 @@ const ImageSection = () => {
           </View>
         </View>
         <View style={styles.backButton}>
-          <BackButton style={styles.backButton} type={'back'} />
+          <BackButton
+            buttonStyle={'one'}
+            style={styles.backButton}
+            type={'back'}
+            onPressedBackButton={() => navigation.navigate('HotelList')}
+          />
         </View>
         <View style={styles.likesButton}>
           <Likes isLikedParam={true} likesCount={123} />
@@ -85,7 +93,7 @@ const ImageSection = () => {
           justifyContent: 'space-between',
         }}>
         <Text style={{color: 'black', fontSize: 12, flexWrap: 'wrap'}}>
-          Jl. Rejonwangun Meltipuro Alaszaja, XII
+          {objectItem.road}
         </Text>
         <StarViewers />
       </View>
@@ -93,25 +101,20 @@ const ImageSection = () => {
   );
 };
 
-const InfoSection = () => {
+const InfoSection = ({objectItem}) => {
   return (
     <View style={styles.hotelInfosContainer}>
       <Text style={styles.txtSubTitle}>Description</Text>
-      <Text style={styles.txtDesc}>
-        Dome Bamboo Villa is an eco-friendly accommodation with a geodesic
-        bamboo design, emphasizing sustainability. The transparent structure
-        connects residents to nature, while modern amenities offer a luxurious
-        stay, making it a uniquely memorable retreat.
-      </Text>
+      <Text style={styles.txtDesc}>{objectItem.desc}</Text>
       <View style={{marginTop: 15}}>
         <Text style={styles.txtSubTitle}>Accomondation Policies</Text>
         <View style={styles.checkInOutWrapper}>
           <Text>Check-in Time </Text>
-          <Text>From 14 : 00 </Text>
+          <Text>From {objectItem.checkin} </Text>
         </View>
         <View style={styles.checkInOutWrapper}>
           <Text>Check-out Time </Text>
-          <Text>Before 14 : 00 </Text>
+          <Text>Before {objectItem.checkout} </Text>
         </View>
       </View>
       <View style={{marginTop: 15}}>

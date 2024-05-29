@@ -1,9 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
+
 import {
   View,
   Text,
-  TextInpu,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -13,7 +12,7 @@ import React, {useState} from 'react';
 import HeroIcon from '../assets/Icon';
 import ButtonGroup from './ButtonGroup';
 
-const HotelFilterInputField = ({isShown}) => {
+const HotelFilterInputField = ({isShown, onPressedSearchButton}) => {
   if (isShown) {
     return (
       <View>
@@ -31,7 +30,7 @@ const HotelFilterInputField = ({isShown}) => {
           <FieldCalendar />
           <View style={{flexDirection: 'row'}}>
             <FieldRoom />
-            <SearchButton />
+            <SearchButton onPressedSearchButton={onPressedSearchButton} />
           </View>
         </Animated.View>
       </View>
@@ -65,20 +64,23 @@ const FieldCalendar = () => {
   );
 };
 
-const SearchButton = () => {
+import {useNavigation} from '@react-navigation/native';
+const SearchButton = ({onPressedSearchButton}) => {
+  const navigation = useNavigation();
   return (
-    <View
+    <TouchableOpacity
       style={{
         flex: 1,
         backgroundColor: 'orange',
         height: '100%',
         borderRadius: 10,
-      }}>
+      }}
+      onPress={onPressedSearchButton}>
       <Text style={{color: 'white', textAlign: 'center', paddingTop: 5}}>
         {' '}
         Search{' '}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

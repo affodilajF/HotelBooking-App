@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
+
 import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import React from 'react';
 

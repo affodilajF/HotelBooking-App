@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
+
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import HeroIcon from '../assets/Icon';
 
-export default function StarViewers() {
+export default function StarViewers({rating, ratinger}) {
   return (
     <View
       style={{
@@ -18,8 +18,8 @@ export default function StarViewers() {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text style={{color: 'black', fontSize: 11}}> 4.5</Text>
-        <Text style={{color: 'grey', fontSize: 9}}> (1566) </Text>
+        <Text style={{color: 'black', fontSize: 11}}> {rating} </Text>
+        <Text style={{color: 'grey', fontSize: 9}}> ({ratinger}) </Text>
       </View>
     </View>
   );

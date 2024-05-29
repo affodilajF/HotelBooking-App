@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
+
 import {
   View,
   Text,
@@ -22,39 +22,39 @@ const Disc: React.FC<{isDisc: boolean; disc: number}> = ({isDisc, disc}) => {
   }
 };
 
-const Hotel = ({
-  isDisc,
-  disc,
-  thumbnail,
-  name,
-  adresses,
-  price,
-  star,
-  reviewers,
-  isBookmarked,
-}) => {
+// isDisc,
+// disc,
+// thumbnail,
+// name,
+// adresses,
+// price,
+// star,
+// reviewers,
+// isBookmarked,
+
+const Hotel = ({objectItem}) => {
   const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       style={styles.hotelWrapper}
-      // onPress={() => navigation.navigate('HotelDetails')}
-    >
-      <Disc isDisc={isDisc} disc={disc} />
+      onPress={() =>
+        navigation.navigate('HotelDetails', {objectItem: objectItem})
+      }>
+      <Disc isDisc={objectItem.isDisc} disc={objectItem.discount} />
       <View style={styles.imageWrapper}>
-        <Image
-          style={styles.imageHotel}
-          source={require('D:/SELF LEARNING/PROJECTS/projectOne/src/assets/Images/hotel3.png')}
-        />
+        <Image style={styles.imageHotel} source={{uri: objectItem.photos[0]}} />
       </View>
       <View style={styles.hotelInfo}>
         <Text
+          numberOfLines={1}
           style={{
             fontSize: 16,
-            fontWeight: 500,
+            fontWeight: '500',
             color: 'black',
             paddingBottom: 3,
           }}>
-          Dome - Bamboo Villa in Eco ...{' '}
+          {objectItem.name}
         </Text>
         <View
           style={{
@@ -63,8 +63,8 @@ const Hotel = ({
             alignItems: 'flex-end',
             paddingBottom: 8,
           }}>
-          <Text style={{fontSize: 11}}>Bali, Indonesia </Text>
-          <StarViewers />
+          <Text style={{fontSize: 11}}> {objectItem.province} </Text>
+          <StarViewers rating={objectItem.ratings} ratinger ={objectItem.ratinger} />
         </View>
         <View
           style={{
@@ -76,12 +76,12 @@ const Hotel = ({
             <Text style={{fontSize: 9, color: 'black'}}>Start from </Text>
             <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
               <Text style={{fontWeight: '800', fontSize: 22, color: '#4691F2'}}>
-                $135
+                ${objectItem.lowestPrice}
               </Text>
               <Text style={{fontSize: 9}}> /night</Text>
             </View>
           </View>
-          <Bookmark size={'small'} isBookmarked={isBookmarked} />
+          <Bookmark size={'small'} isBookmarked={objectItem.isBookmarked} />
         </View>
       </View>
     </TouchableOpacity>
@@ -102,11 +102,6 @@ const styles = StyleSheet.create({
     borderColor: '#E2E1FF', // Warna outline
     paddingHorizontal: 10,
   },
-  imageHotel: {
-    height: '100%',
-    width: '100%',
-    borderRadius: 5,
-  },
   discTag: {
     position: 'absolute',
     backgroundColor: '#0EBE20',
@@ -120,6 +115,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 10,
     backgroundColor: 'white',
+  },
+  imageHotel: {
+    height: '100%',
+    width: '100%',
+    borderRadius: 5,
   },
   hotelInfo: {
     flex: 2,

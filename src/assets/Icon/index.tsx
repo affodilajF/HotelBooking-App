@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
 import * as Icons from 'react-native-heroicons/solid';
 import * as Icons2 from 'react-native-heroicons/outline';
@@ -7,6 +6,8 @@ const HeroIcon = ({type, boolean}) => {
   switch (type) {
     case 'back':
       return <Icons.ChevronLeftIcon width={20} height={20} color={'orange'} />;
+    case 'back2':
+      return <Icons.ChevronLeftIcon width={20} height={20} color={'#1769D4'} />;
     case 'ticket':
       return <Icons.TicketIcon width={37} height={37} color={'#1769D4'} />;
     case 'location':

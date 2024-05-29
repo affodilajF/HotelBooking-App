@@ -1,10 +1,13 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
 import {View, Text} from 'react-native';
 import React from 'react';
 import HeroIcon from '../assets/Icon';
 
-const Bookmark = ({isBookmarked, size}) => {
+interface BookmarkProps {
+  isBookmarked: boolean;
+  size: string;
+}
+
+const Bookmark = ({isBookmarked, size}: BookmarkProps) => {
   switch (size) {
     case 'small':
       return (

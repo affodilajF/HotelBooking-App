@@ -1,5 +1,4 @@
 /* eslint-disable react/self-closing-comp */
-/* eslint-disable prettier/prettier */
 
 import React, {useState} from 'react';
 import {View, TextInput, TouchableOpacity, StyleSheet} from 'react-native';

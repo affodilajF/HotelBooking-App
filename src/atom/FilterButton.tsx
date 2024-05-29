@@ -1,14 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
-import {View, Text, TouchableOpacity} from 'react-native';
+
+import {TouchableOpacity} from 'react-native';
 import React from 'react';
 import HeroIcon from '../assets/Icon';
 
-type FilterButtonProps = {
+type Props = {
   onPressFilterButton: () => void;
 };
 
-const FilterButton: React.FC<FilterButtonProps> = ({onPressFilterButton}) => {
+const FilterButton: React.FC<Props> = ({onPressFilterButton}) => {
   return (
     <TouchableOpacity
       style={{
@@ -19,7 +19,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({onPressFilterButton}) => {
         borderColor: '#4691F2',
       }}
       onPress={onPressFilterButton}>
-      <HeroIcon type={'filter'} />
+      <HeroIcon type={'filter'} boolean={undefined} />
     </TouchableOpacity>
   );
 };

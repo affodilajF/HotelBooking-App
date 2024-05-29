@@ -1,39 +1,31 @@
-/* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
 
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Animated,
-} from 'react-native';
-import React, {useEffect, useState, useRef} from 'react';
-import HeroIcon from '../../assets/Icon';
-import BestDealHotel from '../../components/PopularHotel';
+import {View, KeyboardAvoidingView, Animated, FlatList} from 'react-native';
+import React, {useState, useRef} from 'react';
 import Hotel from '../../components/Hotel';
 import SearchView from '../../atom/SearchView';
 import FilterButton from '../../atom/FilterButton';
-import ButtonGroup from '../../components/ButtonGroup';
 import HotelFilterInputField from '../../components/HotelFilterInputField';
+import BackButton from '../../atom/BackButton';
+import {useNavigation} from '@react-navigation/native';
+import HotelDummy from '../../dummyDatas/HotelsDummy';
 
 export default function ListHotel() {
   // const [isSearchClicked, setSearchClicked] = useState(false);
-  const [isFilterShown, setFilterShown] = useState(true);
-
+  const [isFilterShown, setFilterShown] = useState(false);
   const scrollY = useRef(new Animated.Value(0)).current;
+  const navigation = useNavigation();
+
+  const renderItem = ({item}) => <Hotel objectItem={item} />;
 
   const handleScroll = Animated.event(
     [{nativeEvent: {contentOffset: {y: scrollY}}}],
     {useNativeDriver: false},
   );
 
-  const handleScrollEndDrag = event => {
+  const handleScrollEndDrag = (event: {
+    nativeEvent: {contentOffset: {y: any}};
+  }) => {
     const offsetY = event.nativeEvent.contentOffset.y;
     const threshold = 10;
 
@@ -63,95 +55,28 @@ export default function ListHotel() {
           gap: 10,
         }}>
         <View style={{flexDirection: 'row', gap: 20}}>
-          <SearchView />
+          <View style={{flexDirection: 'row', flex: 1}}>
+            <BackButton
+              buttonStyle={'two'}
+              type={'back'}
+              onPressedBackButton={() => navigation.navigate('Home')}
+            />
+            <SearchView />
+          </View>
           <FilterButton onPressFilterButton={handleFilterButtonShow} />
         </View>
-        {/* <ButtonGroup /> */}
-        <HotelFilterInputField
-          isShown={isFilterShown}
-        />
+        <HotelFilterInputField isShown={isFilterShown} />
       </View>
       <View style={{flex: 1, marginHorizontal: 20}}>
-        <ScrollView
+        <FlatList
           onScroll={handleScroll}
           onScrollEndDrag={handleScrollEndDrag}
-          scrollEventThrottle={8}>
-          <PopularHotels />
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginVertical: 5,
-              marginTop: 20,
-            }}>
-            <Text style={{fontSize: 18, color: 'black', fontWeight: 600}}>
-              Find your comfort!
-            </Text>
-            <Text style={{color: 'blue'}}> See all</Text>
-          </View>
-          <Hotel isBookmarked={true} isDisc={true} disc={23} />
-          <Hotel isBookmarked={false} />
-          <Hotel isBookmarked={false} isDisc={true} disc={33} />
-          <Hotel isBookmarked={false} />
-          <Hotel isBookmarked={true} isDisc={false} disc={0} />
-          <Hotel isBookmarked={false} />
-          <Hotel isBookmarked={false} isDisc={true} disc={23} />
-          <Hotel isBookmarked={false} />
-        </ScrollView>
+          scrollEventThrottle={8}
+          data={HotelDummy}
+          renderItem={renderItem}
+          keyExtractor={item => item.key}
+        />
       </View>
     </KeyboardAvoidingView>
   );
 }
-
-const PopularHotels = ({show}) => {
-  if (!show) {
-    return (
-      <View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginVertical: 5,
-            marginTop: 20,
-          }}>
-          <Text style={{fontSize: 18, color: 'black', fontWeight: 600}}>
-            Popular
-          </Text>
-          <Text style={{color: 'blue'}}> See all</Text>
-        </View>
-        <View>
-          <ScrollView horizontal>
-            <BestDealHotel
-              isLikedParam={true}
-              isDisc={true}
-              disc={30}
-              likesCount={1239}
-            />
-            <BestDealHotel
-              isLikedParam={false}
-              isDisc={false}
-              disc={0}
-              likesCount={1011}
-            />
-            <BestDealHotel
-              isLikedParam={false}
-              isDisc={false}
-              disc={0}
-              likesCount={989}
-            />
-            <BestDealHotel
-              isLikedParam={true}
-              isDisc={true}
-              disc={30}
-              likesCount={654}
-            />
-          </ScrollView>
-        </View>
-      </View>
-    );
-  } else {
-    return null;
-  }
-};

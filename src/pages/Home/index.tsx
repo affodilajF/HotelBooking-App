@@ -1,42 +1,36 @@
-/* eslint-disable no-alert */
-/* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
-
 import {
   View,
   Text,
   StyleSheet,
-  ImageBackground,
   Image,
   ScrollView,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Animated,
+  FlatList,
 } from 'react-native';
-import React, {useEffect, useState, useRef} from 'react';
-import HeroIcon from '../../assets/Icon';
-import BestDealHotel from '../../components/PopularHotel';
-import Hotel from '../../components/Hotel';
-import SearchView from '../../atom/SearchView';
-import FilterButton from '../../atom/FilterButton';
-import ButtonGroup from '../../components/ButtonGroup';
+import React from 'react';
 import HotelFilterInputField from '../../components/HotelFilterInputField';
+import {useNavigation} from '@react-navigation/native';
+import SubHeading from '../../atom/SubHeading';
+import Hotel2 from '../../components/Hotel2';
+import Destination from '../../components/Destination';
+import HotelDummy from '../../dummyDatas/HotelsDummy';
+import DestinationDummy from '../../dummyDatas/DestinationsDummy';
 
 const Home = () => {
-  // const handleIconPress = iconName => {
-  //   alert(iconName);
-  // };
+  const navigation = useNavigation();
   return (
     <ScrollView style={{backgroundColor: '#4691F2'}}>
       <Profile />
       <View style={styles.viewWrapper}>
         <View style={styles.balanceCardWrapper}>
-          <HotelFilterInputField isShown={true} />
+          <HotelFilterInputField
+            isShown={true}
+            onPressedSearchButton={() => navigation.navigate('HotelList')}
+          />
         </View>
         <View style={styles.sliderWrapper}>
-          <PopularHotels show={undefined} />
-          <PopularHotels show={undefined} />
+          <ExploreDestinations />
+          <PopularHotels />
         </View>
       </View>
     </ScrollView>
@@ -51,13 +45,11 @@ const Profile = () => {
         paddingHorizontal: 20,
         justifyContent: 'space-between',
         paddingTop: 15,
-        // alignItems: 'center',
-        flex: 2.2,
         height: 120,
       }}>
       <View>
         <Text style={{color: 'white'}}> Hello, </Text>
-        <Text style={{color: 'white', fontSize: 24, fontWeight: 600}}>
+        <Text style={{color: 'white', fontSize: 24, fontWeight: '600'}}>
           {' '}
           Fadil Daffodil!{' '}
         </Text>
@@ -65,30 +57,6 @@ const Profile = () => {
       <View>
         <Image
           style={styles.image2}
-          source={require('D:/SELF LEARNING/PROJECTS/projectOne/src/assets/Images/wallet.png')}
-        />
-      </View>
-    </View>
-  );
-};
-
-const BalanceCard = () => {
-  return (
-    <View style={styles.balanceCardWrapper}>
-      <View style={{flex: 1}}>
-        <Text style={{fontWeight: '800', fontSize: 18, color: '#4441E6'}}>
-          Current{' '}
-        </Text>
-        <Text style={{fontWeight: '300', fontSize: 15, marginTop: 30}}>
-          My Ballance
-        </Text>
-        <Text style={{fontWeight: '800', fontSize: 25, color: '#0F0E60'}}>
-          Rp.555665.000{' '}
-        </Text>
-      </View>
-      <View>
-        <Image
-          style={styles.image}
           source={require('D:/SELF LEARNING/PROJECTS/projectOne/src/assets/Images/wallet.png')}
         />
       </View>
@@ -106,16 +74,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#FfFFFF',
     padding: 20,
     borderRadius: 20,
-    elevation: 10,
-    // flexDirection: 'row',
     marginHorizontal: 25,
     marginTop: -25,
+    elevation: 10,
     shadowColor: '#0F0E60',
     borderWidth: 3, // Lebar outline
     borderColor: '#E2E1FF', // Warna outline
   },
   sliderWrapper: {
     paddingHorizontal: 25,
+    // INI PADDING SEMENTARA YAH
+    height: 1000,
+    paddingTop: 15,
   },
   image: {
     flex: 1,
@@ -138,54 +108,46 @@ const styles = StyleSheet.create({
 
 export default Home;
 
-const PopularHotels = ({show}) => {
-  if (!show) {
-    return (
-      <View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginVertical: 5,
-            marginTop: 20,
-          }}>
-          <Text style={{fontSize: 18, color: 'black', fontWeight: 600}}>
-            Popular
-          </Text>
-          <Text style={{color: 'blue'}}> See all</Text>
-        </View>
-        <View>
-          <ScrollView horizontal>
-            <BestDealHotel
-              isLikedParam={true}
-              isDisc={true}
-              disc={30}
-              likesCount={1239}
-            />
-            <BestDealHotel
-              isLikedParam={false}
-              isDisc={false}
-              disc={0}
-              likesCount={1011}
-            />
-            <BestDealHotel
-              isLikedParam={false}
-              isDisc={false}
-              disc={0}
-              likesCount={989}
-            />
-            <BestDealHotel
-              isLikedParam={true}
-              isDisc={true}
-              disc={30}
-              likesCount={654}
-            />
-          </ScrollView>
-        </View>
+const ExploreDestinations = () => {
+  const renderItem = ({item}) => (
+    <View style={{marginRight: 18}}>
+      <Destination size={'small'} objProps={item} />
+    </View>
+  );
+  return (
+    <View style={{paddingTop: 15}}>
+      <SubHeading
+        subHeading={'Explore Destination!'}
+        onPressedSeeMore={undefined}
+      />
+      <View style={{paddingTop: 15}}>
+        <FlatList
+          horizontal={true}
+          data={DestinationDummy}
+          renderItem={renderItem}
+          keyExtractor={item => item.key}
+        />
       </View>
-    );
-  } else {
-    return null;
-  }
+    </View>
+  );
+};
+const PopularHotels = () => {
+  const renderItem = ({item}) => (
+    <View style={{margin: 8}}>
+      <Hotel2 size={'medium'} objProps={item} />
+    </View>
+  );
+  return (
+    <View style={{paddingTop: 25}}>
+      <SubHeading subHeading={'Popular'} onPressedSeeMore={undefined} />
+      <View>
+        <FlatList
+          horizontal={true}
+          data={HotelDummy}
+          renderItem={renderItem}
+          keyExtractor={item => item.key}
+        />
+      </View>
+    </View>
+  );
 };

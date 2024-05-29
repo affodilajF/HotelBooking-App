@@ -1,29 +1,21 @@
-/* eslint-disable prettier/prettier */
-import {View, Text} from 'react-native';
-import React from 'react';
-
-const hotelsDummy = () => {
-  return (
-    <View>
-      <Text>hotelsDummy</Text>
-    </View>
-  );
-};
-
-const data = [
+const HotelDummy = [
   {
     key: '1',
-    name: 'Dome - Bamboo Villa in Eco ...',
+    name: 'Dome - Bamboo Villa in Econo',
+    province: 'Bali, Indonesia',
+    address: 'Tirtomurto, DKI Jakarta, Indonesia',
     ratings: 4.5,
+    ratinger: 1288,
     reviewers: 12566,
-    likesCount: 125,
+    likesCount: 128,
     isDisc: true,
     discount: 30,
     lowestPrice: 135,
+    highestPrice: 255,
     checkin: '14:00',
     checkout: '15:00',
     photos: [
-      'D:/SELF LEARNING/PROJECTS/projectOne/src/assets/Images/hotel3.png',
+      'https://i.pinimg.com/564x/98/a9/cd/98a9cd688171ade35268d5423c2493b7.jpg',
       'https://example.com/photo2.jpg',
     ],
     roomType: {
@@ -31,7 +23,7 @@ const data = [
         amenities: ['Free Wi-Fi', 'Breakfast', 'Air Conditioning'],
         bedType: 'King-size bed',
         maxOccupancy: 2,
-        price: 135,
+        price: 89,
         photos: [
           'https://example.com/photo1.jpg',
           'https://example.com/photo2.jpg',
@@ -43,7 +35,7 @@ const data = [
         maxOccupancy: 3,
         price: 175,
         photos: [
-          'https://example.com/photo1.jpg',
+          'D:/SELF LEARNING/PROJECTS/projectOne/src/assets/Images/hotel3.png',
           'https://example.com/photo2.jpg',
         ],
       },
@@ -52,16 +44,22 @@ const data = [
   {
     key: '2',
     name: 'Alana Hotel',
-    ratings: 4.5,
+    province: 'Jakarta, Indonesia',
+    address: 'Tirtomurto, DKI Jakarta, Indonesia',
+    road: 'Jl. Rejonwangun Meltipuro Azaa, XIII',
+    ratings: 4.8,
+    ratinger: 1587,
     reviewers: 12566,
     likesCount: 125,
-    isDisc: false,
-    discount: 0,
-    lowestPrice: 135,
+    isDisc: true,
+    discount: 13,
+    lowestPrice: 54,
+    highestPrice: 255,
     checkin: '14:00',
     checkout: '15:00',
+    desc: 'Boasting stylish accommodations and a range of amenities, it offers a seamless blend of comfort and convenience for both business and leisure travelers. With its central location and personalized service, Alana Hotel ensures a memorable stay that reflects the vibrant spirit of its surroundings.',
     photos: [
-      'https://example.com/photo1.jpg',
+      'https://i.pinimg.com/564x/47/60/9f/47609ff63956c960d824f1bd68e282e3.jpg',
       'https://example.com/photo2.jpg',
     ],
     roomType: {
@@ -89,17 +87,23 @@ const data = [
   },
   {
     key: '3',
-    name: 'Mamamamama Vila',
-    ratings: 4.5,
+    name: 'Mamana Vila',
+    province: 'Lombok, Indonesia',
+    address: 'Tirtomurto, Bali, Indonesia',
+    road: 'Jl. Rejonwangun Meltipuro Azaa, XII',
+    ratings: 3.8,
+    ratinger: 1299,
     reviewers: 12566,
     likesCount: 125,
     isDisc: true,
-    discount: 30,
-    lowestPrice: 135,
+    discount: 23,
+    lowestPrice: 185,
+    highestPrice: 255,
     checkin: '14:00',
     checkout: '15:00',
+    desc: 'With exquisitely appointed accommodations and bespoke services, it offers an unforgettable escape for those seeking sophistication and relaxation. From panoramic views to personalized concierge services, Mamana Villa promises a timeless retreat of indulgence and elegance',
     photos: [
-      'https://example.com/photo1.jpg',
+      'https://i.pinimg.com/736x/3d/38/9c/3d389cf5bd91fbc5fe7466aed813b22b.jpg',
       'https://example.com/photo2.jpg',
     ],
     roomType: {
@@ -127,17 +131,145 @@ const data = [
   },
   {
     key: '4',
+    name: 'Alazma Hotel',
+    province: 'Surabaya, Indonesia',
+    address: 'Tirtomurto, DKI Jakarta, Indonesia',
+    ratings: 4.7,
+    ratinger: 1450,
+    reviewers: 12566,
+    likesCount: 125,
+    isDisc: false,
+    discount: 0,
+    lowestPrice: 115,
+    highestPrice: 255,
+    checkin: '14:00',
+    checkout: '15:00',
+    photos: [
+      'https://i.pinimg.com/564x/3a/f8/d8/3af8d8edd38b45f806bba278f00ff5a1.jpg',
+      'https://example.com/photo2.jpg',
+    ],
+    roomType: {
+      deluxe: {
+        amenities: ['Free Wi-Fi', 'Breakfast', 'Air Conditioning'],
+        bedType: 'King-size bed',
+        maxOccupancy: 2,
+        price: 135,
+        photos: [
+          'https://example.com/photo1.jpg',
+          'https://example.com/photo2.jpg',
+        ],
+      },
+      suite: {
+        amenities: ['Free Wi-Fi', 'Breakfast', 'Air Conditioning'],
+        bedType: 'King-size bed',
+        maxOccupancy: 3,
+        price: 175,
+        photos: [
+          'https://example.com/photo1.jpg',
+          'https://example.com/photo2.jpg',
+        ],
+      },
+    },
+  },
+  {
+    key: '5',
+    name: 'Kakassay Hotel',
+    province: 'Jakarta, Indonesia',
+    address: 'Tirtomurto, DKI Jakarta, Indonesia',
+    ratings: 4.1,
+    ratinger: 820,
+    reviewers: 12566,
+    likesCount: 125,
+    isDisc: false,
+    discount: 0,
+    lowestPrice: 35,
+    highestPrice: 255,
+    checkin: '14:00',
+    checkout: '15:00',
+    desc: 'Dome Bamboo Villa is an eco-friendly accommodation with a geodesic  bamboo design, emphasizing sustainability. The transparent structure connects residents to nature, while modern amenities offer a luxurious  stay, making it a uniquely memorable retreat.',
+    photos: [
+      'https://i.pinimg.com/564x/53/47/6a/53476a9ce987dcc41b19385744f09ab3.jpg',
+      'https://example.com/photo2.jpg',
+    ],
+    roomType: {
+      deluxe: {
+        amenities: ['Free Wi-Fi', 'Breakfast', 'Air Conditioning'],
+        bedType: 'King-size bed',
+        maxOccupancy: 2,
+        price: 135,
+        photos: [
+          'https://example.com/photo1.jpg',
+          'https://example.com/photo2.jpg',
+        ],
+      },
+      suite: {
+        amenities: ['Free Wi-Fi', 'Breakfast', 'Air Conditioning'],
+        bedType: 'King-size bed',
+        maxOccupancy: 3,
+        price: 175,
+        photos: [
+          'https://example.com/photo1.jpg',
+          'https://example.com/photo2.jpg',
+        ],
+      },
+    },
+  },
+  {
+    key: '6',
     name: 'Kakakakas Hotel',
+    address: 'Tirtomurto, DKI Jakarta, Indonesia',
     ratings: 4.5,
+    reviewers: 12566,
+    likesCount: 125,
+    isDisc: true,
+    discount: 6,
+    lowestPrice: 88,
+    highestPrice: 255,
+    checkin: '14:00',
+    checkout: '15:00',
+    photos: [
+      'https://i.pinimg.com/564x/82/19/b0/8219b056ee638430f50034d5f67bcd66.jpg',
+      'https://example.com/photo2.jpg',
+    ],
+    roomType: {
+      deluxe: {
+        amenities: ['Free Wi-Fi', 'Breakfast', 'Air Conditioning'],
+        bedType: 'King-size bed',
+        maxOccupancy: 2,
+        price: 135,
+        photos: [
+          'https://example.com/photo1.jpg',
+          'https://example.com/photo2.jpg',
+        ],
+      },
+      suite: {
+        amenities: ['Free Wi-Fi', 'Breakfast', 'Air Conditioning'],
+        bedType: 'King-size bed',
+        maxOccupancy: 3,
+        price: 175,
+        photos: [
+          'https://example.com/photo1.jpg',
+          'https://example.com/photo2.jpg',
+        ],
+      },
+    },
+  },
+  {
+    key: '7',
+    name: 'Kakakakas Hotel',
+    address: 'Tirtomurto, DKI Jakarta, Indonesia',
+    ratings: 4.5,
+    ratinger: 120,
     reviewers: 12566,
     likesCount: 125,
     isDisc: true,
     discount: 30,
     lowestPrice: 135,
+    highestPrice: 255,
     checkin: '14:00',
     checkout: '15:00',
     photos: [
-      'https://example.com/photo1.jpg',
+      'https://i.pinimg.com/736x/4b/75/da/4b75da8320bbb5b6da22c521d6ac34a8.jpg',
       'https://example.com/photo2.jpg',
     ],
     roomType: {
@@ -165,4 +297,4 @@ const data = [
   },
 ];
 
-export default hotelsDummy;
+export default HotelDummy;

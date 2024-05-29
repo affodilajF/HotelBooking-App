@@ -1,7 +1,6 @@
 /* eslint-disable no-alert */
-/* eslint-disable react/self-closing-comp */
+
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
 
 import {
   View,
