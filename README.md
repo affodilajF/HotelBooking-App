@@ -1,3 +1,10 @@
+
+![Frame 1](https://github.com/affodilajF/HotelBooking-App/assets/130672181/cc4b6656-873b-4227-aafc-cb5c01a885b2)
+
+
+
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
